@@ -401,6 +401,16 @@ services:
       - ./volumes/db/pooler.sql:/docker-entrypoint-initdb.d/migrations/99-pooler.sql:Z
       # Use named volume to persist pgsodium decryption key between restarts
       - db-config:/etc/postgresql-custom
+  
+  metabase:
+    image: metabase/metabase:v0.50.30.1
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      MB_SITE_NAME: Dash
+      MB_APPLICATION_NAME: Dash
+      MB_DB_FILE: /metabase-data/metabase.db
 
   vector:
     image: timberio/vector:0.28.1-alpine
