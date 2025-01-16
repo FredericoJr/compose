@@ -407,6 +407,8 @@ services:
     depends_on:
       - db
     restart: unless-stopped
+    volumes:
+      - ./volumes/metabase:/metabase-data
     environment:
       MB_SITE_NAME: Dash
       MB_APPLICATION_NAME: Dash
